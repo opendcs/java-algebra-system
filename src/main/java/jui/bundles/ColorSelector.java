@@ -41,13 +41,6 @@ public class ColorSelector extends VBox {
         super(x, y, w, h);
     }
 
-    /**
-     * @deprecated public void setFontSize(int fontSize) {
-     * if (fontSize <= 0) return;
-     * font = getParent().createFont("Seravek-Regular", fontSize);
-     * updateFont();
-     * }
-     */
 
     private void updateFont() {
         title.setTextFont(font);

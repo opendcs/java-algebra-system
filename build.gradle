@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
+application {
+    mainClass = 'CAS'
+}
+
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    //implementation 'org.openjfx:javafx:11'
+    implementation 'org.processing:core:3.3.7'
+}
