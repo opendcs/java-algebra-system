@@ -1,5 +1,9 @@
 package specific;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
 import jas.core.Compiler;
 import jas.core.components.RawValue;
 import jas.core.operations.Binary;
@@ -11,6 +15,31 @@ import text.TestPrint;
  * Binary Test
  */
 public class BinaryOperationTest {
+
+    @Test
+    public void test_binary_operations() { 
+        Binary binOp = new Binary(RawValue.ZERO, "*", RawValue.ONE);
+
+        assertEquals(RawValue.ZERO,binOp.getLeft());
+        assertEquals(RawValue.ONE,binOp.getRight());
+        assertTrue(binOp.is("*"));
+
+        Binary.define("&", 3, (a, b) -> a + b);
+        assertTrue(Binary.operators().contains("&"));
+        assertTrue(Binary.operators(3).contains("&"));
+        
+        assertEquals(3*5,Operation.mult(3, 5).val());
+        assertEquals(Math.pow(2,3),Operation.exp(2, new RawValue(3)).val());
+        
+        assertTrue(((Binary)Compiler.compile("a+b")).isCommutative());
+    }
+
+    @Test
+    public void test_simplification() {
+        String result = Compiler.compile("x+x*a").simplify().toString();
+        assertEquals("x+x*a",result);
+    }
+
     public static void main(String args[]) {
         Binary binOp = new Binary(RawValue.ZERO, "*", RawValue.ONE);
         l(binOp.getRight(), binOp.getLeft());
