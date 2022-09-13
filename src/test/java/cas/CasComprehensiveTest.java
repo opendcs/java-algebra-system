@@ -1,4 +1,4 @@
-package tests.cas;
+package cas;
 
 import jas.Function;
 import jas.core.Compiler;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static jas.utils.ColorFormatter.*;
-import static tests.TestPrint.l;
+import static text.TestPrint.l;
 
 /**
  * Created by Jiachen on 16/05/2017.

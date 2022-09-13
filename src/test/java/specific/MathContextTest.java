@@ -1,4 +1,4 @@
-package tests.specific;
+package specific;
 
 import jas.MathContext;
 import jas.core.Node;
@@ -8,7 +8,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 
 import static jas.utils.ColorFormatter.*;
-import static tests.TestPrint.l;
+import static text.TestPrint.l;
 
 public class MathContextTest {
 

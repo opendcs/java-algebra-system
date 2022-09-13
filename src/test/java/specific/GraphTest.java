@@ -1,4 +1,4 @@
-package tests.specific;
+package specific;
 
 import jas.core.Compiler;
 import jas.graph.GraphFunction;

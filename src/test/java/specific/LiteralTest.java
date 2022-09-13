@@ -1,9 +1,9 @@
-package tests.specific;
+package specific;
 
 import jas.core.Compiler;
 import jas.core.components.Literal;
 
-import static tests.TestPrint.*;
+import static text.TestPrint.*;
 
 /**
  * Created by Jiachen on 3/23/18.

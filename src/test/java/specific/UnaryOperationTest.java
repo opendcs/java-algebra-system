@@ -1,4 +1,4 @@
-package tests.specific;
+package specific;
 
 import jas.core.Compiler;
 import jas.core.Node;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 import static jas.utils.ColorFormatter.boldBlack;
 import static jas.utils.ColorFormatter.lightGreen;
-import static tests.TestPrint.*;
+import static text.TestPrint.*;
 
 /**
  * Created by Jiachen on 3/8/18.

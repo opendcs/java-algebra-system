@@ -1,4 +1,4 @@
-package tests.specific;
+package specific;
 
 import jas.MathContext;
 import jas.core.Compiler;
@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 import static jas.utils.ColorFormatter.*;
-import static tests.TestPrint.l;
+import static text.TestPrint.l;
 
 /**
  * Created by Jiachen on 3/6/18.

@@ -1,8 +1,8 @@
-package tests.specific;
+package specific;
 
 import jas.core.components.RawValue;
 
-import static tests.TestPrint.l;
+import static text.TestPrint.l;
 
 /**
  * Created by Jiachen on 3/7/18.

@@ -1,4 +1,3 @@
-package tests;
 
 import jas.Function;
 import jas.core.Compiler;

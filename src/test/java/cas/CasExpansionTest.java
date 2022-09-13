@@ -1,4 +1,4 @@
-package tests.cas;
+package cas;
 
 import jas.core.Compiler;
 import jas.core.Node;

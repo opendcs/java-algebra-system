@@ -1,4 +1,4 @@
-package tests.specific;
+package specific;
 
 import jas.core.Compiler;
 import jas.core.components.Constants;
@@ -9,7 +9,7 @@ import jas.core.operations.Custom;
 import jas.core.operations.Manipulation;
 import jas.core.operations.Signature;
 
-import static tests.TestPrint.l;
+import static text.TestPrint.l;
 
 /**
  * Created by Jiachen on 3/17/18.

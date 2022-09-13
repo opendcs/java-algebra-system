@@ -1,10 +1,10 @@
-package tests.specific;
+package specific;
 
 import jas.core.Compiler;
 import jas.core.components.RawValue;
 import jas.core.operations.Binary;
 import jas.core.operations.Operation;
-import tests.TestPrint;
+import text.TestPrint;
 
 /**
  * Created by Jiachen on 3/7/18.

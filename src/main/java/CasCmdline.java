@@ -4,8 +4,8 @@ import jas.core.JASException;
 import java.util.Scanner;
 
 import static jas.utils.ColorFormatter.*;
-import static tests.TestPrint.l;
-import static tests.TestPrint.p;
+import static text.TestPrint.l;
+import static text.TestPrint.p;
 
 /**
  * Created by Jiachen on 3/2/18.

@@ -1,4 +1,3 @@
-package tests;
 
 import jas.core.Compiler;
 import jas.core.JASException;
@@ -11,9 +10,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import text.TestPrint;
 
 import static jas.utils.ColorFormatter.*;
-import static tests.TestPrint.l;
+import static text.TestPrint.l;
+
 
 /**
  * Created by Jiachen on 3/10/18.

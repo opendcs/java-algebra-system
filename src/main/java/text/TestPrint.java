@@ -1,4 +1,4 @@
-package tests;
+package text;
 
 /**
  * Created by Jiachen on 3/7/18.

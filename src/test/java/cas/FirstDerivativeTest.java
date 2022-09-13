@@ -1,7 +1,7 @@
-package tests.cas;
+package cas;
 
 import static jas.core.Compiler.compile;
-import static tests.TestPrint.l;
+import static text.TestPrint.l;
 
 /**
  * Created by Jiachen on 3/17/18.
