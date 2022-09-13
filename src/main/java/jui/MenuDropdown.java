@@ -169,7 +169,7 @@ public class MenuDropdown extends Contextual implements MouseControl {
 
     public void keyReleased() {
         if (keyTriggering)
-            downKeyCodes.remove(new Integer(getParent().keyCode));
+            downKeyCodes.remove(Integer.valueOf(getParent().keyCode));
         if (!isVisible()) return;
         for (MenuItem m : menuItems) {
             m.keyReleased();
