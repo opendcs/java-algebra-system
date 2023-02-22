@@ -40,25 +40,23 @@ public class BinaryOperationTest {
         assertEquals("x+x*a",result);
     }
 
+    @Test
+    public void test_flatten() {
+        System.out.println("hello");
+        var nodes = ((Binary) Compiler.compile("(x)^b")).flattened();
+        assertTrue(nodes.isEmpty());
+        nodes = ((Binary) Compiler.compile("a+b*c+1")).flattened();
+        assertFalse(nodes.isEmpty());
+    }
+
     public static void main(String args[]) {
-        Binary binOp = new Binary(RawValue.ZERO, "*", RawValue.ONE);
-        l(binOp.getRight(), binOp.getLeft());
-        binOp.setRight(RawValue.ONE);
-        Binary.define("&", 3, (a, b) -> a + b);
-        l(Binary.operators(), Binary.operators(3));
-        l(Binary.getPriority("&"), Binary.getPriority("+"));
-        l(new Binary(RawValue.ZERO, "*", RawValue.ONE).getPriority());
-        l(new Binary(RawValue.ZERO, "*", RawValue.ONE).flattened());
-        l(binOp.is("*"));
-        l(Operation.mult(3, 5));
-        l(Operation.exp(Math.random(), new RawValue(3)));
-        l(Operation.exp(3, Math.random()));
-        l(Compiler.compile("x+x*a").simplify());
+        /*
         ((Binary) Compiler.compile("x^b")).flattened().forEach(TestPrint::l);
         l(Operation.div(17, 4).setOperand(binOp.getOperand(1), 1).setOperands(binOp.getOperands()));
         l(Operation.div(3, 4).setLeft(new RawValue(5)));
         l(((Binary) Compiler.compile("a+b")).isCommutative());
         l(Compiler.compile("a*c*d-1*-1"));
+        */
     }
 
     private static void l(Object... objects) {
