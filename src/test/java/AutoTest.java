@@ -116,25 +116,7 @@ public class AutoTest {
         test("/tests/files/expansion/irr_num.txt", true, "expand", "simplify");
     }
 
-    private static void testToExponentialForm() throws Exception {
-        l(lightPurple("\n---------> Exponential Form \n"));
-        l(boldBlack("\n---------> Binary Operations Test \n"));
-        test("/tests/files/exponential/bin_ops.txt", true, "toExponentialForm");
-        l(boldBlack("\n---------> Unary Operations Test \n"));
-        test("/tests/files/exponential/u_ops.txt", true, "toExponentialForm");
-        l(boldBlack("\n---------> Irrational Numbers Test \n"));
-        test("/tests/files/exponential/irr_num.txt", true, "toExponentialForm");
-    }
-
-    private void testToAdditionOnly() throws Exception {
-        l(lightPurple("\n---------> Addition Only Form \n"));
-        l(boldBlack("\n---------> Binary Operations Test \n"));
-        test("/tests/files/additional/bin_ops.txt", true, "toAdditionOnly");
-        l(boldBlack("\n---------> Unary Operations Test \n"));
-        test("/tests/files/additional/u_ops.txt", true, "toAdditionOnly");
-        l(boldBlack("\n---------> Irrational Numbers Test \n"));
-        test("/tests/files/additional/irr_num.txt", true, "toAdditionOnly");
-    }
+    
 */
 
     @SuppressWarnings("unchecked")
@@ -206,7 +188,10 @@ public class AutoTest {
     @CsvSource(value = {
         "/additional/bin_ops.txt,true,toAdditionOnly",
         "/additional/u_ops.txt,true,toAdditionOnly",
-        "/additional/irr_num.txt,true,toAdditionOnly"
+        "/additional/irr_num.txt,true,toAdditionOnly",
+        "/exponential/bin_ops.txt,true,toExponentialForm",
+        "/exponential/u_ops.txt,true,toExponentialForm",
+        "/exponential/irr_num.txt,true,toExponentialForm"
     })
     public void test(String fileName, boolean testValue, String methodsStr) throws Exception {
         String []methods = methodsStr.split(",");
