@@ -10,9 +10,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
 import text.TestPrint;
 
 import static jas.utils.ColorFormatter.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static text.TestPrint.l;
 
 
@@ -23,7 +29,7 @@ import static text.TestPrint.l;
 @SuppressWarnings("unused")
 public class AutoTest {
     public static boolean WRITE = false;
-
+/*
     public static void main(String args[]) throws Exception {
         configureCAS();
         Compiler.compile("((-1)*ln(x)+a)*(4+x)*cos(a)+(c+x)*sin(a)");
@@ -48,6 +54,7 @@ public class AutoTest {
         }
     }
 
+    
     private static void testComplexity() throws Exception {
         l(lightPurple("\n---------> Complexity \n"));
         l(boldBlack("\n---------> Binary Operations Test \n"));
@@ -119,7 +126,7 @@ public class AutoTest {
         test("/tests/files/exponential/irr_num.txt", true, "toExponentialForm");
     }
 
-    private static void testToAdditionOnly() throws Exception {
+    private void testToAdditionOnly() throws Exception {
         l(lightPurple("\n---------> Addition Only Form \n"));
         l(boldBlack("\n---------> Binary Operations Test \n"));
         test("/tests/files/additional/bin_ops.txt", true, "toAdditionOnly");
@@ -128,7 +135,7 @@ public class AutoTest {
         l(boldBlack("\n---------> Irrational Numbers Test \n"));
         test("/tests/files/additional/irr_num.txt", true, "toAdditionOnly");
     }
-
+*/
 
     @SuppressWarnings("unchecked")
     private static Method getMethod(Class c, String name) {
@@ -188,14 +195,21 @@ public class AutoTest {
     }
 
     private static String getOriginal(String l) {
-        return l.contains("->") ? l.substring(0, l.indexOf("->")) : l;
+        return (l.contains("->") ? l.substring(0, l.indexOf("->")) : l).trim();
     }
 
     private static String getComputed(String l) {
-        return l.contains("->") ? l.substring(l.indexOf("->") + 2) : "";
+        return (l.contains("->") ? l.substring(l.indexOf("->") + 2) : "").trim();
     }
 
-    private static void test(String fileName, boolean testValue, String... methods) throws Exception {
+    @ParameterizedTest
+    @CsvSource(value = {
+        "/additional/bin_ops.txt,true,toAdditionOnly",
+        "/additional/u_ops.txt,true,toAdditionOnly",
+        "/additional/irr_num.txt,true,toAdditionOnly"
+    })
+    public void test(String fileName, boolean testValue, String methodsStr) throws Exception {
+        String []methods = methodsStr.split(",");
         ArrayList<String> lines = getLines(Utils.read(fileName));
         ArrayList<Node> ops = (ArrayList<Node>) lines.stream()
                 .map(l -> Compiler.compile(getOriginal(l)))
@@ -212,7 +226,7 @@ public class AutoTest {
         }
         maxLength += 1;
 
-        int finalMaxLength = maxLength;
+        final int finalMaxLength = maxLength;
         lines = (ArrayList<String>) ops.stream()
                 .map(op -> ensureLength(op.toString(), finalMaxLength))
                 .collect(Collectors.toList());
@@ -237,17 +251,25 @@ public class AutoTest {
                 if (o1.numVars() > 0) {
                     ArrayList<String> errs = new ArrayList<>();
                     for (int k = 0; k <= 10; k++) {
-                        int t = (int) Math.pow(k, 2);
+                        int t = (int) Math.pow(k, 2);                        
                         double diffx = o1.eval(k) - o2.eval(k);
-                        if (diffx > 1E-10) {
-                            errs.add(ensureLength("", maxLength) + boldBlack("DIFF(x=" + t + "): ") + lightRed(diffx));
+                        if( Double.isNaN(diffx) ) {
+                            double first = o1.eval(k);
+                            double second = o1.eval(k);
+                            assertTrue(Double.isNaN(first) || Double.isInfinite(first),()->String.format("Value was %f",first));
+                            assertTrue(Double.isNaN(second) || Double.isInfinite(second),()->String.format("Value was %f",second));
+                        } else {
+                            assertTrue(diffx < 1E-10,() -> {
+                                StringBuilder sb = new StringBuilder();
+                                sb.append("For ").append(o1.toString()).append(" = ").append(o2.toString());
+                                sb.append(ensureLength("", finalMaxLength) + boldBlack("DIFF(x=" + t + "): ") + lightRed(diffx));
+                                return sb.toString();
+                            });
                         }
+                        
+                        
                     }
-                    if (errs.size() > 0) {
-                        if (prev.equals(now))
-                            l(line + lightGreen("SAME") + boldBlack(" = ") + lightBlue(prev + " "));
-                        errs.forEach(TestPrint::l);
-                    }
+                    
                 } else {
                     double v = o1.val() - o2.val();
                     if (v > 1E-10) {
@@ -268,7 +290,8 @@ public class AutoTest {
         content.ifPresent(c -> Utils.write(fileName, c));
     }
 
-    private static void configureCAS() {
+    @BeforeAll
+    public static void configureCAS() {
         Binary.define("%", 2, (a, b) -> a % b);
     }
 
