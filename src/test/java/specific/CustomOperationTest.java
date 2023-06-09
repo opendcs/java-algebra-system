@@ -13,6 +13,7 @@ import jas.core.operations.Signature;
 import static org.junit.jupiter.api.Assertions.*;
 import static text.TestPrint.l;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -25,6 +26,16 @@ public class CustomOperationTest {
     @BeforeAll
     public static void setup() {
         Mode.DEBUG = true;
+
+        Custom.register(new Manipulation("custom", new Signature(Argument.ANY), operands -> {
+            double calc = Math.log(operands.get(0).numNodes());
+            return new RawValue(calc);
+        }));
+    }
+
+    @AfterAll
+    public static void teardown() {
+        Custom.unregister("custom", Signature.ANY);
     }
 
     @Test
@@ -56,13 +67,10 @@ public class CustomOperationTest {
         l(Argument.OPERATION.equals(Argument.NUMBER));
         l(Compiler.compile("expand(a*(b+c))").exec());
 
-        Custom.register(new Manipulation("custom", new Signature(Argument.ANY), operands -> {
-            double calc = Math.log(operands.get(0).numNodes());
-            return new RawValue(calc);
-        }));
+        
 
         l(Compiler.compile("custom(x+b-c)").val());
-        Custom.unregister("custom", Signature.ANY);
-        l(Compiler.compile("custom(x+b-c)").val());
+        
+        //l(Compiler.compile("custom(x+b-c)").val());
     }
 }
