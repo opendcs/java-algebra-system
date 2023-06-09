@@ -93,7 +93,7 @@ public abstract class Operation extends Node implements Nameable {
 
     /**
      * e.g. left hand of 2^x in a Binary is "2"
-     * left hand of log<x> is "x"
+     * left hand of log&lt;x&gt; is "x"
      *
      * @return for Binary, the first arg is returned. For Unary, the only arg is returned.
      */

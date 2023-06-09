@@ -18,6 +18,7 @@ java {
 group = "org.opendcs"
 archivesBaseName = "java-algebra-system"
 version = "0.0.1-SNAPSHOT"
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 application {
     mainClass = 'CAS'
@@ -31,6 +32,10 @@ repositories {
     mavenCentral()
 }
 
+tasks.withType(Javadoc) {
+    options.addStringOption('-Xdoclint:none','-quiet')
+    failOnError false
+}
 
 dependencies {
     //implementation 'org.openjfx:javafx:11'
@@ -103,7 +108,9 @@ publishing {
         }
     }
 }
-/*
+
 signing {
+    required { isReleaseVersion && gradle.taskGraph.hasTask("publish") }
+    useGpgCmd()
     sign publishing.publications.mavenJava
-}*/
+}

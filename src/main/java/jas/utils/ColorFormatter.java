@@ -47,10 +47,10 @@ public class ColorFormatter {
     /**
      * returns a colored line!
      *
-     * @param modifier a sequence of escape characters for modifying the color& font.
+     * @param modifier a sequence of escape characters for modifying the color &amp; font.
      * @param line     the line to be colored
      * @param symbols  the symbols to be replaced with color
-     * @return a beautifully formatted&colorful line for printing!
+     * @return a beautifully formatted &amp; colorful line for printing!
      * @since May 16th
      */
     public static String coloredLine(String modifier, String line, String... symbols) {

@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * this.addEventListener(Event.MOUSE_ENTERED, getParent()::noCursor);
  * this.addEventListener(Event.MOUSE_LEFT, getParent()::cursor);
  * <p>
- * TODO: Add polar & parametric graph.
+ * TODO: Add polar &amp; parametric graph.
  * TODO: add grids
  */
 public class Graph extends Contextual {

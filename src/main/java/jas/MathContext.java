@@ -95,7 +95,7 @@ public class MathContext {
     }
 
     /**
-     * This method wraps the recursiveFactor(BigInteger N, ArrayList<BigInteger> factors) method.
+     * This method wraps the recursiveFactor(BigInteger N, ArrayList&lt;BigInteger&gt; factors) method.
      * 1 is not returned as a factor.
      * e.g. factor(12) returns [2,2,3]
      *

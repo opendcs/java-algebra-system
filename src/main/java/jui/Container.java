@@ -290,7 +290,7 @@ public abstract class Container extends Displayable {
 
     /**
      * Apply the outlook of this container to all of its nodes. Overloading method of the root method
-     * applyOutlookToNodes(Displayable root, ArrayList<Displayable> nodes, boolean recursive, Class... omits);
+     * applyOutlookToNodes(Displayable root, ArrayList&gt;Displayable&lt; nodes, boolean recursive, Class... omits);
      * see details below.
      *
      * @return this instance of Container for chained access.
@@ -303,7 +303,7 @@ public abstract class Container extends Displayable {
 
     /**
      * Overloading method of the root method
-     * applyOutlookToNodes(Displayable root, ArrayList<Displayable> nodes, boolean recursive, Class... omits);
+     * applyOutlookToNodes(Displayable root, ArrayList&gt;Displayable&gt; nodes, boolean recursive, Class... omits);
      * see details below.
      *
      * @since May 2nd.
@@ -466,5 +466,3 @@ public abstract class Container extends Displayable {
         }
     }
 }
-
-
