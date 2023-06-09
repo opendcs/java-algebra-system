@@ -1,14 +1,23 @@
 plugins {
     id 'java'
     id 'application'
+    id 'java-library'
     id 'org.openjfx.javafxplugin' version '0.0.13'
+    id 'maven-publish'
+    id 'signing'
 }
 
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(11)
     }
+    withJavadocJar()
+    withSourcesJar()
 }
+
+group = "org.opendcs"
+archivesBaseName = "java-algebra-system"
+version = "0.0.1-SNAPSHOT"
 
 application {
     mainClass = 'CAS'
@@ -38,3 +47,63 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'java-algebra-system'
+            from components.java
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+            pom {
+                name = 'Java Algebra System'
+                description = 'Library for computer algebra work.'
+                url = 'https://github.com/opendcs/java-algebra-system'
+                scm {
+                    connection = 'scm:git:https://github.com/opendcs/java-algebra-system'
+                    developerConnection = 'scm:git:git@github.com:opendcs/java-algebra-system.git'
+                    url = 'https://github.com/opendcs/java-algebra-system'
+                }
+
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/license/mit/'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'jiachenren'
+                        name = 'Jiachen Ren'
+                        email = 'https://github.com/JiachenRen'
+                    }
+                    developer {
+                        id = 'opendcs-team'
+                        name = 'OpenDCS Dev Team'
+                        email = 'https://github.com/opendcs' 
+                    }
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            // change URLs to point to your repos, e.g. http://my.org/repo
+            def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
+            def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        }
+    }
+}
+/*
+signing {
+    sign publishing.publications.mavenJava
+}*/
