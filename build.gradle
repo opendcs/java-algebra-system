@@ -33,7 +33,7 @@ repositories {
 }
 
 tasks.withType(Javadoc) {
-    options.addStringOption('-Xdoclint:none','-quiet')
+    options.addStringOption('Xdoclint:none','-quiet')
     failOnError false
 }
 

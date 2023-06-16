@@ -59,7 +59,7 @@ public class Unary extends Operation implements BinLeafNode {
 
     /**
      * List of built-in operations:
-     * -> cos, acos(cos^-1), sin, asin, tan, atan, sec, csc, cot, log, int, abs, ln, cosh, sinh, tanh, !(factorial)
+     * -&gt; cos, acos(cos^-1), sin, asin, tan, atan, sec, csc, cot, log, int, abs, ln, cosh, sinh, tanh, !(factorial)
      *
      * @return a Collection containing all of the defined unary operations.
      */
@@ -91,7 +91,7 @@ public class Unary extends Operation implements BinLeafNode {
     /**
      * Note: modifies self.
      * TODO: ln(a) - ln(b) should be ln(a/b)
-     * log(225) should be 2log(15) -> implemented
+     * log(225) should be 2log(15) -&gt; implemented
      *
      * @return a new Node instance that is the simplified version of self.
      */

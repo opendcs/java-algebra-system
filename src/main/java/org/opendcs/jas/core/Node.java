@@ -191,9 +191,9 @@ public abstract class Node implements Evaluable {
 
     /**
      * basically reversing the effects of toAdditionalOnly and toExponentialForm
-     * a*b^(-1) -> a/b,
-     * a*(1/3) -> a/3,
-     * a+(-1)*b -> a-b
+     * a*b^(-1) -&gt; a/b,
+     * a*(1/3) -&gt; a/3,
+     * a+(-1)*b -&gt; a-b
      * <p>
      * before invoking this method, the Node should already by at a stage where it is simplified,
      * converted to additional only and in exponential form.

@@ -144,9 +144,9 @@ public abstract class Operation extends Node implements Nameable {
 
     /**
      * basically reversing the effects of toAdditionalOnly and toExponentialForm
-     * a*b^(-1) -> a/b,
-     * a*(1/3) -> a/3,
-     * a+(-1)*b -> a-b
+     * a*b^(-1) -&gt; a/b,
+     * a*(1/3) -&gt; a/3,
+     * a+(-1)*b -&gt; a-b
      *
      * @return beautified version of the original
      */
