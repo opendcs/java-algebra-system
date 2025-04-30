@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'application'
     id 'java-library'
-    id 'org.openjfx.javafxplugin' version '0.0.13'
     id 'maven-publish'
     id 'signing'
 }
@@ -24,10 +23,6 @@ application {
     mainClass = 'CAS'
 }
 
-javafx {
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
-}
-
 repositories {
     mavenCentral()
 }
@@ -38,7 +33,6 @@ tasks.withType(Javadoc) {
 }
 
 dependencies {
-    //implementation 'org.openjfx:javafx:11'
     implementation 'org.processing:core:3.3.7'
 
     testImplementation 'org.mockito:mockito-core:3.4.6'
