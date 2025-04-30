@@ -1,10 +1,10 @@
 # Java Algebra System (JAS)
-A powerful graphing computer algebra system that is capable of performing algebraic simplifications, manipulations, and some calculus. (A Grapher is also included)
+A powerful graphing computer algebra system that is capable of performing algebraic simplifications, manipulations, and some calculus. 
 
-![1](misc/screenshots/jas_simple_ui.png)
+Graphical Options have been removed from this distribution. They may be brought back in the future.
 
 ## What can it do?
-JAS is a multivariate computer algebra system built using Java. JAS handles the following senarios in both fraction and decimal mode:
+JAS is a multivariate computer algebra system built using Java. JAS handles the following scenarios in both fraction and decimal mode:
 
 - [x] Commutative arithmetic & algebra
 - [x] Nested unary operation simplification
@@ -292,4 +292,6 @@ System.out.println(Compiler.compile("seed*2-1").val()) // prints a random number
 # The JAS Based Grapher
 
 ## What's new
-Epic update to JGrapher - introducing multi-variable graphing capability! Type in `x^a*cos(b*x)` and see what happens along the way! Play around with the sliders. Press `[TAB]` to hide/unhide function input. Significant improvements to the CAS, though not as powerful, it is no longer considered experimental with bugs now gone and inheritance optimized. Completely original & intuitive way of performing algebra manipulations by an ORIGINAL composite tree structure that proved to be immensely powerful and ingenious.
+
+
+Project was forked to add automated released and improve automated test usage.
