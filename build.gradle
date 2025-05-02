@@ -1,9 +1,20 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+
+    dependencies {
+        classpath 'io.github.opendcs.maven:maven-central-upload:0.1.1'
+    }
+}
 plugins {
     id 'java'
-    id 'application'
     id 'java-library'
     id 'maven-publish'
     id 'signing'
+    id 'com.palantir.git-version' version '3.2.0'
+    id 'io.github.opendcs.maven.maven-central-upload' version '0.1.1'
 }
 
 java {
@@ -14,14 +25,18 @@ java {
     withSourcesJar()
 }
 
-group = "org.opendcs"
+group = "io.github.opendcs"
 archivesBaseName = "java-algebra-system"
-version = "0.0.1-SNAPSHOT"
-ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
-application {
-    mainClass = 'CAS'
+def static versionLabel(gitInfo) {
+    def branch = gitInfo.branchName // all branches are snapshots, only tags get released
+    def tag = gitInfo.lastTag
+    // tag is returned as is. Branch may need cleanup
+    return branch == null ? tag : 99 + "." + branch.replace("/", "-") + "-SNAPSHOT"
 }
+
+def tmp_version = project.findProperty("versionOverride") ?: versionLabel(versionDetails())
+version = tmp_version
 
 repositories {
     mavenCentral()
@@ -93,76 +108,24 @@ publishing {
             }
         }
     }
+
     repositories {
         maven {
-            // change URLs to point to your repos, e.g. http://my.org/repo
-            def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-            def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            name = "mavenCentralApi"
+            url = "https://central.sonatype.com"
+            def user = project.findProperty("centralApiUsername")
+            def passwd = project.findProperty("centralApiPassword")
             credentials {
-                username = project.findProperty("ossrhUsername")
-                password = project.findProperty("ossrhPassword")
+                username = user
+                password = passwd
             }
         }
     }
 }
 
 signing {
-    required { isReleaseVersion && gradle.taskGraph.hasTask("publish") }
-    useGpgCmd()
-    sign publishing.publications.mavenJava
+    def signingKey = (project.findProperty("signingKey")?: "").trim().replace("\n","")
+    def signingPassword = project.findProperty("signingKeyPassword")?: ""
+    useInMemoryPgpKeys(signingKey, signingPassword)
+    sign publishing.publications.withType(MavenPublication)
 }
-
-/*
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { deployment -> signing.signPom(deployment) }
-
-            repository(url: "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            snapshotRepository(url: "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            pom.project {
-                name 'OpenDCS Java Algebra System'
-                packaging 'jar'
-                // optionally artifactId can be defined here
-                description 'A version of the Java Algebra System packaged by the OpenDCS Team.'
-                url 'github.com/opendcs/java-algebra-system'
-
-                scm {
-                    connection 'scm:git:https://github.com/opendcs/java-algebra-system'
-                    developerConnection 'scm:git:ssh://github.com:opendcs/opendcs.git'
-                    url 'https://github.com/opendcs/java-algebra-system/main'
-                }
-
-                licenses {
-                license {
-                    name 'MIT License'
-                    url 'https://opensource.org/license/mit/'
-                }
-                }
-
-                developers {
-                    developer {
-                        id 'jiachenren'
-                        name 'Jiachen Ren'
-                        url 'https://github.com/jiachenren'
-
-                    }
-                    developer {
-                        id 'opendcs'
-                        name 'OpenDCS Team'
-                        organization 'OpenDCS Consortium'
-                        email 'opendcs@freelists.org'
-                        organizationurl 'https://github.com/opendcs'
-                    }
-                }
-            }
-        }
-    }
-}*/
