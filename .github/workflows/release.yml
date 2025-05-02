@@ -49,7 +49,7 @@ jobs:
         run: echo ${VERSION}
       - name: Push to central
         run: |
-          ./gradlew publish --info -Psign=true \
+          ./gradlew publishAllToNewMavenCentralApi --info \
              -PversionOverride=$VERSION \
              -PsigningKeyPassword="${{ secrets.signingKeyPassword != null && secrets.signingKeyPassword || secrets.SIGNING_KEY_PASSWORD }}" \
              -PcentralApiUsername=${{ secrets.centralApiUsername != null && secrets.centralApiUsername || secrets.CENTRALAPI_USERNAME }} \
